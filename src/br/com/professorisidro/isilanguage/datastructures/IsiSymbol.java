@@ -7,7 +7,6 @@ public abstract class IsiSymbol {
 	public abstract String generateJavaCode();
 	public IsiSymbol(String name) {
 		this.name = name;
-		
 	}
 
 
@@ -19,7 +18,6 @@ public abstract class IsiSymbol {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	@Override
 	public String toString() {
