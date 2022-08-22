@@ -37,7 +37,6 @@ public class IsiVariable extends IsiSymbol {
 	}
 
 	public void setAttributed(boolean condition) {
-		System.out.println("setting true");
 		this.attributed = condition;
 	}
 
