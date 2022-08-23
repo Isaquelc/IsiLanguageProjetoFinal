@@ -29,8 +29,11 @@ grammar IsiLang;
 	private String _exprID;
 	private String _exprContent;
 	private String _exprDecision;
+	private int _exprType;
 	private ArrayList<AbstractCommand> listaTrue;
 	private ArrayList<AbstractCommand> listaFalse;
+
+	private String[] typeDict = new String[] {"numero", "text"};
 	
 	public void verificaID(String id){
 		if (!symbolTable.exists(id)){
@@ -147,10 +150,14 @@ cmdattrib	:  ID 	{ verificaID(_input.LT(-1).getText());
 				ATTR { _exprContent = ""; } 
 				expr 
 				SC
-				{
+				{	
+					IsiVariable var = (IsiVariable)symbolTable.get(_exprID);
+					
+					if (var.getType() != _exprType) {
+						throw new IsiSemanticException(String.format("Variable %s expects a %s but received a %s instead", var.getName(), typeDict[var.getType()], typeDict[_exprType]));
+					}
 					CommandAtribuicao cmd = new CommandAtribuicao(_exprID, _exprContent);
 					stack.peek().add(cmd);
-					IsiVariable var = (IsiVariable)symbolTable.get(_exprID);
 					var.setAttributed(true);
 				}
 			;
@@ -188,9 +195,15 @@ cmdselecao  :  'se' AP
             ;
 			
 expr		:  termo ( 
-				OP  { _exprContent += _input.LT(-1).getText();}
+				OP  { 	_exprContent += _input.LT(-1).getText();
+						_exprType = 0;
+					}
 				termo
 				)*
+			|
+				TEXTO { _exprContent += _input.LT(-1).getText();
+						_exprType = 1;
+						}
 			;
 			
 termo		: ID { verificaID(_input.LT(-1).getText());
@@ -201,8 +214,7 @@ termo		: ID { verificaID(_input.LT(-1).getText());
 			{
 				_exprContent += _input.LT(-1).getText();
 			}
-			;
-			
+			;	
 	
 AP	: '('
 	;
@@ -232,10 +244,14 @@ FCH : '}'
 OPREL 	: '>' | '<' | '>=' | '<=' | '==' | '!='
 		;
 
-ID	: [a-z] ([a-z] | [A-Z] | [0-9])*
-	;
+ID		: [a-z] ([a-z] | [A-Z] | [0-9])*
+		;
 	
 NUMBER	: [0-9]+ ('.' [0-9]+)?
 		;
 		
-WS	: (' ' | '\t' | '\n' | '\r') -> skip;
+WS		: (' ' | '\t' | '\n' | '\r') -> skip;
+
+QUOTES 	: ('"');
+
+TEXTO	: ["]([a-z] | [A-Z] | [0-9])*["];

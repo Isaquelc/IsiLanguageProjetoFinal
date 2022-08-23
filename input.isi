@@ -5,9 +5,10 @@ programa
 
   leia(a);
   leia(b);
+  leia(t1);
   
   a = 1 + 2 * 3 / b;
-  
+  a = "Text";
 
   se ( a > b ) {
      escreva (a);
