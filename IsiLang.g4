@@ -33,6 +33,7 @@ grammar IsiLang;
 	private int _exprType;
 	private ArrayList<AbstractCommand> listaTrue;
 	private ArrayList<AbstractCommand> listaFalse;
+	private ArrayList<AbstractCommand> commandEnq;
 
 	private String[] typeDict = new String[] {"numero", "text"};
 	
@@ -197,24 +198,24 @@ cmdselecao  :  'se' AP
             ;
 
 cmdenquanto  : 'enquanto' AP
-			 			  ID { _exprDecision = _input.LT(-1).getText(); }
-             		      OPREL { _exprDecision += _input.LT(-1).getText(); }
-             			  (ID | NUMBER) {_exprDecision += _input.LT(-1).getText(); }
-             			  FP 
-             			  ACH 
-             			  { 
-            	 		  curThread = new ArrayList<AbstractCommand>();
-                 		  stack.push(curThread);
-             			  }
-             			  (cmd)+ 
-                    
-             			  FCH 
-             			  {
-                  		  commandEnq = stack.pop();
-                  		  CommandEnquanto cmd = new CommandEnquanto(_exprDecision, commandEnq);
-                  		  stack.peek().add(cmd);	
-                          }
-             			  ; 
+						ID { _exprDecision = _input.LT(-1).getText(); }
+						OPREL { _exprDecision += _input.LT(-1).getText(); }
+						(ID | NUMBER) {_exprDecision += _input.LT(-1).getText(); }
+						FP 
+						ACH 
+						{ 
+						curThread = new ArrayList<AbstractCommand>();
+						stack.push(curThread);
+						}
+						(cmd)+ 
+				
+						FCH 
+						{
+						commandEnq = stack.pop();
+						CommandEnquanto cmd = new CommandEnquanto(_exprDecision, commandEnq);
+						stack.peek().add(cmd);	
+						}
+						; 
 			
 expr		:  termo ( 
 				OP  { 	_exprContent += _input.LT(-1).getText();
@@ -278,4 +279,4 @@ WS		: (' ' | '\t' | '\n' | '\r') -> skip;
 
 QUOTES 	: ('"');
 
-TEXTO	: ["]([a-z] | [A-Z] | [0-9])*["];
+TEXTO	: ["]([a-z] | [A-Z] | [0-9] | ' ')*["];

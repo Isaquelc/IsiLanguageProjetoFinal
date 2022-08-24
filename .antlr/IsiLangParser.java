@@ -1,4 +1,4 @@
-// Generated from c:\Users\barro\OneDrive\Documentos\UFABC\2022.2\compiladores\IsiLanguageProjetoFinal-1\IsiLang.g4 by ANTLR 4.9.2
+// Generated from c:\Users\isaqu\Documents\UFABC\2022-02\Compiladores\IsiLanguageProjetoFinal\IsiLang.g4 by ANTLR 4.9.2
 
 	import br.com.professorisidro.isilanguage.datastructures.IsiSymbol;
 	import br.com.professorisidro.isilanguage.datastructures.IsiVariable;
@@ -124,6 +124,7 @@ public class IsiLangParser extends Parser {
 		private int _exprType;
 		private ArrayList<AbstractCommand> listaTrue;
 		private ArrayList<AbstractCommand> listaFalse;
+		private ArrayList<AbstractCommand> commandEnq;
 
 		private String[] typeDict = new String[] {"numero", "text"};
 		
@@ -846,9 +847,9 @@ public class IsiLangParser extends Parser {
 			setState(133);
 			match(ACH);
 			 
-			            	 		  curThread = new ArrayList<AbstractCommand>();
-			                 		  stack.push(curThread);
-			             			  
+									curThread = new ArrayList<AbstractCommand>();
+									stack.push(curThread);
+									
 			setState(136); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -866,10 +867,10 @@ public class IsiLangParser extends Parser {
 			setState(140);
 			match(FCH);
 
-			                  		  commandEnq = stack.pop();
-			                  		  CommandEnquanto cmd = new CommandEnquanto(_exprDecision, commandEnq);
-			                  		  stack.peek().add(cmd);	
-			                          
+									commandEnq = stack.pop();
+									CommandEnquanto cmd = new CommandEnquanto(_exprDecision, commandEnq);
+									stack.peek().add(cmd);	
+									
 			}
 		}
 		catch (RecognitionException re) {

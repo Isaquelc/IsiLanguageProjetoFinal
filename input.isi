@@ -8,7 +8,7 @@ programa
   leia(t1);
   
   a = 1 + 2 * 3 / b;
-  a = "Text";
+  t1 = "textao sim";
 
   se ( a > b ) {
      escreva (a);
@@ -17,6 +17,10 @@ programa
      escreva (b);
   }
   
+enquanto (a > b) {
+   escreva (a);
+   a = a-1;
+}
   
 
 fimprog;
