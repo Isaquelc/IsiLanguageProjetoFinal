@@ -10,6 +10,7 @@ null
 'se'
 'senao'
 'enquanto'
+'faca'
 '('
 ')'
 ';'
@@ -41,6 +42,7 @@ null
 AP
 FP
 SC
+AC
 OP
 ATTR
 VIR

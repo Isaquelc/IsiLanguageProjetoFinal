@@ -10,6 +10,7 @@ package br.com.professorisidro.isilanguage.parser;
 	import br.com.professorisidro.isilanguage.ast.CommandLeitura;
 	import br.com.professorisidro.isilanguage.ast.CommandEscrita;
 	import br.com.professorisidro.isilanguage.ast.CommandEnquanto;
+	import br.com.professorisidro.isilanguage.ast.CommandFacaEnquanto;
 	import br.com.professorisidro.isilanguage.ast.CommandAtribuicao;
 	import br.com.professorisidro.isilanguage.ast.CommandDecisao;
 	import java.util.ArrayList;
@@ -34,25 +35,25 @@ public class IsiLangParser extends Parser {
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, AP=11, FP=12, SC=13, OP=14, ATTR=15, VIR=16, ACH=17, FCH=18, 
-		OPREL=19, ID=20, NUMBER=21, WS=22, QUOTES=23, TEXT=24, BOOLEAN=25;
+		OPREL=19, ID=20, NUMBER=21, WS=22, QUOTES=23, TEXT=24, BOOLEAN=25, AC=26;
 	public static final int
 		RULE_prog = 0, RULE_decl = 1, RULE_declaravar = 2, RULE_tipo = 3, RULE_bloco = 4, 
 		RULE_cmd = 5, RULE_cmdleitura = 6, RULE_cmdescrita = 7, RULE_cmdattrib = 8, 
-		RULE_cmdselecao = 9, RULE_cmdenquanto = 10, RULE_expr = 11, RULE_termo = 12;
+		RULE_cmdselecao = 9, RULE_cmdenquanto = 10, RULE_expr = 11, RULE_termo = 12, RULE_cmdloop = 13;
 	public static final String[] ruleNames = {
 		"prog", "decl", "declaravar", "tipo", "bloco", "cmd", "cmdleitura", "cmdescrita", 
-		"cmdattrib", "cmdselecao", "cmdenquanto", "expr", "termo"
+		"cmdattrib", "cmdselecao", "cmdenquanto", "expr", "termo", "cmdloop"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
 		null, "'programa'", "'fimprog;'", "'numero'", "'texto'", "'booleano'", 
-		"'leia'", "'escreva'", "'se'", "'senao'", "'enquanto'", "'('", "')'", 
+		"'leia'", "'escreva'", "'se'", "'senao'", "'enquanto'", "'faca'", "'('", "')'", 
 		"';'", null, "'='", "','", "'{'", "'}'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, null, null, null, null, null, null, null, null, null, null, "AP", 
 		"FP", "SC", "OP", "ATTR", "VIR", "ACH", "FCH", "OPREL", "ID", "NUMBER", 
-		"WS", "QUOTES", "TEXT", "BOOLEAN"
+		"WS", "QUOTES", "TEXT", "BOOLEAN", "AC"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -114,9 +115,11 @@ public class IsiLangParser extends Parser {
 		private String _exprContent;
 		private String _exprDecision;
 		private int _exprType;
+		private String _exprWhile;
 		private ArrayList<AbstractCommand> listaTrue;
 		private ArrayList<AbstractCommand> listaFalse;
 		private ArrayList<AbstractCommand> commandEnq;
+		private ArrayList<AbstractCommand> listaLoop;
 
 		private String[] typeDict = new String[] {"numero", "texto", "booleano"};
 		
@@ -479,6 +482,9 @@ public class IsiLangParser extends Parser {
 		}
 		public CmdenquantoContext cmdenquanto() {
 			return getRuleContext(CmdenquantoContext.class,0);
+		}
+		public CmdloopContext cmdloop() {
+			return getRuleContext(CmdloopContext.class,0);
 		}
 		public CmdContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -958,6 +964,154 @@ public class IsiLangParser extends Parser {
 									CommandEnquanto cmd = new CommandEnquanto(_exprDecision, commandEnq);
 									stack.peek().add(cmd);	
 									
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class CmdloopContext extends ParserRuleContext {
+		public TerminalNode AP() { return getToken(IsiLangParser.AP, 0); }
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
+		}
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
+		}
+		public TerminalNode OPREL() { return getToken(IsiLangParser.OPREL, 0); }
+		public TerminalNode FP() { return getToken(IsiLangParser.FP, 0); }
+		public TerminalNode AC() { return getToken(IsiLangParser.AC, 0); }
+		public TerminalNode FC() { return getToken(IsiLangParser.ID, 0); }
+		public List<CmdContext> cmd() {
+			return getRuleContexts(CmdContext.class);
+		}
+		public CmdContext cmd(int i) {
+			return getRuleContext(CmdContext.class,i);
+		}
+		public CmdloopContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_cmdloop; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof IsiLangParser ) ((IsiLangParser)listener).enterCmdloop(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof IsiLangParser ) ((IsiLangParser)listener).exitCmdloop(this);
+		}
+	}
+
+	public final CmdloopContext cmdloop() throws RecognitionException {
+		CmdloopContext _localctx = new CmdloopContext(_ctx, getState());
+		enterRule(_localctx, 20, RULE_cmdloop);
+		int _la;
+		try {
+			setState(163);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case T__8:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(124);
+				match(T__8);
+				setState(125);
+				match(AP);
+				setState(126);
+				expr();
+				_exprWhile = _input.LT(-1).getText();
+				setState(128);
+				match(OPREL);
+				_exprWhile += _input.LT(-1).getText();
+				setState(130);
+				expr();
+				_exprWhile += _input.LT(-1).getText();
+				setState(132);
+				match(FP);
+				setState(133);
+				match(AC);
+				     curThread = new ArrayList<AbstractCommand>(); 
+				                    stack.push(curThread);
+				                
+				setState(136); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				do {
+					{
+					{
+					setState(135);
+					cmd();
+					}
+					}
+					setState(138); 
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__4) | (1L << T__5) | (1L << T__6) | (1L << T__8) | (1L << T__9) | (1L << ID))) != 0) );
+				setState(140);
+				match(ID);
+
+				                      listaLoop = stack.pop();
+				                      CommandEnquanto cmd = new CommandEnquanto(_exprWhile, listaLoop);
+				                      stack.peek().add(cmd);
+				                
+				}
+				break;
+			case T__9:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(143);
+				match(T__9);
+				setState(144);
+				match(AC);
+				     curThread = new ArrayList<AbstractCommand>(); 
+				                    stack.push(curThread);
+				                
+				setState(147); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				do {
+					{
+					{
+					setState(146);
+					cmd();
+					}
+					}
+					setState(149); 
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__4) | (1L << T__5) | (1L << T__6) | (1L << T__8) | (1L << T__9) | (1L << ID))) != 0) );
+				setState(151);
+				match(ID);
+				setState(152);
+				match(T__8);
+				setState(153);
+				match(AP);
+				setState(154);
+				expr();
+				_exprWhile = _input.LT(-1).getText();
+				setState(156);
+				match(OPREL);
+				_exprWhile += _input.LT(-1).getText();
+				setState(158);
+				expr();
+				_exprWhile += _input.LT(-1).getText();
+				setState(160);
+				match(FP);
+				   listaLoop = stack.pop();
+				                      CommandFacaEnquanto cmd = new CommandFacaEnquanto(_exprWhile, listaLoop);
+				                      stack.peek().add(cmd);
+				                
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {

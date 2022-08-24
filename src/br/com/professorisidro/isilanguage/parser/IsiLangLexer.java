@@ -10,6 +10,7 @@ package br.com.professorisidro.isilanguage.parser;
 	import br.com.professorisidro.isilanguage.ast.CommandLeitura;
 	import br.com.professorisidro.isilanguage.ast.CommandEscrita;
 	import br.com.professorisidro.isilanguage.ast.CommandEnquanto;
+	import br.com.professorisidro.isilanguage.ast.CommandFacaEnquanto;
 	import br.com.professorisidro.isilanguage.ast.CommandAtribuicao;
 	import br.com.professorisidro.isilanguage.ast.CommandDecisao;
 	import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class IsiLangLexer extends Lexer {
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, AP=11, FP=12, SC=13, OP=14, ATTR=15, VIR=16, ACH=17, FCH=18, 
-		OPREL=19, ID=20, NUMBER=21, WS=22, QUOTES=23, TEXT=24, BOOLEAN=25;
+		OPREL=19, ID=20, NUMBER=21, WS=22, QUOTES=23, TEXT=24, BOOLEAN=25, AC=26;
 	public static String[] channelNames = {
 		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
 	};
@@ -46,18 +47,18 @@ public class IsiLangLexer extends Lexer {
 	public static final String[] ruleNames = {
 		"T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", "T__7", "T__8", 
 		"T__9", "AP", "FP", "SC", "OP", "ATTR", "VIR", "ACH", "FCH", "OPREL", 
-		"ID", "NUMBER", "WS", "QUOTES", "TEXT", "BOOLEAN"
+		"ID", "NUMBER", "WS", "QUOTES", "TEXT", "BOOLEAN", "AC"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
 		null, "'programa'", "'fimprog;'", "'numero'", "'texto'", "'booleano'", 
-		"'leia'", "'escreva'", "'se'", "'senao'", "'enquanto'", "'('", "')'", 
+		"'leia'", "'escreva'", "'se'", "'senao'", "'enquanto'", "'faca'","'('", "')'", 
 		"';'", null, "'='", "','", "'{'", "'}'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, null, null, null, null, null, null, null, null, null, null, "AP", 
 		"FP", "SC", "OP", "ATTR", "VIR", "ACH", "FCH", "OPREL", "ID", "NUMBER", 
-		"WS", "QUOTES", "TEXT", "BOOLEAN"
+		"WS", "QUOTES", "TEXT", "BOOLEAN", "AC"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -107,9 +108,11 @@ public class IsiLangLexer extends Lexer {
 		private String _exprContent;
 		private String _exprDecision;
 		private int _exprType;
+		private String _exprWhile;
 		private ArrayList<AbstractCommand> listaTrue;
 		private ArrayList<AbstractCommand> listaFalse;
 		private ArrayList<AbstractCommand> commandEnq;
+		private ArrayList<AbstractCommand> listaLoop;
 
 		private String[] typeDict = new String[] {"numero", "texto", "booleano"};
 		
