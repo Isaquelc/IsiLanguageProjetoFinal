@@ -6,12 +6,12 @@ programa
 
   leia(a);
   leia(b);
-  leia(t1);
+
   
   a = 1 + 2 * 3 / b;
   z=Verdade;
   z=Falso;
-  t1 = "textao sim";
+  
 
   se ( a > b ) {
      escreva (a);
@@ -25,5 +25,9 @@ enquanto (a > b) {
    a = a-1;
 }
  
+faca (
+   escreva (b);
+   b = b+1;
+) enquanto (a<b)
 
 fimprog;

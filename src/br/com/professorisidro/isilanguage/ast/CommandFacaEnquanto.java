@@ -1,4 +1,4 @@
-package Commands;
+package br.com.professorisidro.isilanguage.ast;
 
 import java.util.ArrayList;
 
@@ -18,13 +18,11 @@ public class CommandFacaEnquanto extends AbstractCommand {
 
         StringBuilder str = new StringBuilder();
 
-
-
         str.append("do {\n");
         for(AbstractCommand cmd : loopCommands) {
             str.append(cmd.generateJavaCode());
         }
-        str.append("\n} while ("+loopCondition+")");
+        str.append("\n} while ("+loopCondition+");");
         return str.toString();
 
     }

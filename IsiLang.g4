@@ -12,6 +12,7 @@ grammar IsiLang;
 	import br.com.professorisidro.isilanguage.ast.CommandEnquanto;
 	import br.com.professorisidro.isilanguage.ast.CommandAtribuicao;
 	import br.com.professorisidro.isilanguage.ast.CommandDecisao;
+	import br.com.professorisidro.isilanguage.ast.CommandFacaEnquanto;
 	import java.util.ArrayList;
 	import java.util.Stack;
 }
@@ -30,10 +31,12 @@ grammar IsiLang;
 	private String _exprID;
 	private String _exprContent;
 	private String _exprDecision;
+	private String _exprWhile;
 	private int _exprType;
 	private ArrayList<AbstractCommand> listaTrue;
 	private ArrayList<AbstractCommand> listaFalse;
 	private ArrayList<AbstractCommand> commandEnq;
+	private ArrayList<AbstractCommand> listaLoop;
 
 	private String[] typeDict = new String[] {"numero", "texto", "booleano"};
 	
@@ -115,7 +118,8 @@ cmd		:  cmdleitura
 		|  cmdescrita 
 		|  cmdattrib
 		|  cmdselecao
-		|  cmdenquanto  
+		|  cmdenquanto
+		|  cmdloop  
 		;
 		
 cmdleitura	: 'leia' 	AP
@@ -217,7 +221,42 @@ cmdenquanto  : 'enquanto' AP
 						stack.peek().add(cmd);	
 						}
 						; 
-			
+
+cmdloop     :     'enquanto' AP 
+                expr {_exprWhile = _input.LT(-1).getText();} 
+                OPREL {_exprWhile += _input.LT(-1).getText();}
+                expr {_exprWhile += _input.LT(-1).getText();}
+                FP 
+                AP 
+                {     curThread = new ArrayList<AbstractCommand>(); 
+                    stack.push(curThread);
+                }
+                (cmd)+
+				FP
+				{
+					listaLoop = stack.pop();
+					CommandEnquanto cmd = new CommandEnquanto(_exprWhile, listaLoop);
+					stack.peek().add(cmd);
+                }
+
+            | 'faca' 
+                AP
+                {     curThread = new ArrayList<AbstractCommand>(); 
+                    stack.push(curThread);
+				}
+				(cmd)+ 
+				FP 
+				'enquanto' AP
+				expr {_exprWhile = _input.LT(-1).getText();}
+				OPREL{_exprWhile += _input.LT(-1).getText();}
+				expr {_exprWhile += _input.LT(-1).getText();}
+				FP
+					{   listaLoop = stack.pop();
+						CommandFacaEnquanto cmd = new CommandFacaEnquanto(_exprWhile, listaLoop);
+						stack.peek().add(cmd);
+					}
+            ;
+
 expr		:  termo ( 
 				OP  { 	_exprContent += _input.LT(-1).getText();
 						_exprType = 0;
@@ -252,6 +291,12 @@ AP	: '('
 FP	: ')'
 	;
 	
+// AC	: '{'
+// 	;
+	
+// FC	: '}'
+// 	;
+
 SC	: ';'
 	;
 	
