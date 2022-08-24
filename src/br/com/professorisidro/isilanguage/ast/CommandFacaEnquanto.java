@@ -28,6 +28,22 @@ public class CommandFacaEnquanto extends AbstractCommand {
     }
 
     @Override
+    public String generatePythonCode() {
+
+        StringBuilder str = new StringBuilder();
+
+        for(AbstractCommand cmd : loopCommands) {
+            str.append(cmd.generatePythonCode());
+        }
+        str.append("while ("+loopCondition+"):\n");
+        for(AbstractCommand cmd : loopCommands) {
+            str.append("    "+cmd.generatePythonCode());
+        }
+        return str.toString();
+
+    }
+
+    @Override
     public String toString() {
         return "CommandEnquanto [faça=" + loopCommands + ", loopCondition " + loopCondition
                 + "]";

@@ -12,7 +12,7 @@ public class IsiProgram {
 	private ArrayList<AbstractCommand> comandos;
 	private String programName;
 
-	public void generateTarget() {
+	public void generateJavaCode() {
 		StringBuilder str = new StringBuilder();
 		str.append("import java.util.Scanner;\n");
 		str.append("public class MainClass{ \n");
@@ -29,6 +29,26 @@ public class IsiProgram {
 		
 		try {
 			FileWriter fr = new FileWriter(new File("MainClass.java"));
+			fr.write(str.toString());
+			fr.close();
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+		}
+
+	}
+
+	public void generatePythonCode() {
+		StringBuilder str = new StringBuilder();
+		for (IsiSymbol symbol: varTable.getAll()) {
+			str.append(symbol.generatePythonCode());
+		}
+		for (AbstractCommand command: comandos) {
+			str.append(command.generatePythonCode());
+		}
+		
+		try {
+			FileWriter fr = new FileWriter(new File("MainClass.py"));
 			fr.write(str.toString());
 			fr.close();
 		}

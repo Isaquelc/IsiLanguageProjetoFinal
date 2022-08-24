@@ -11,6 +11,7 @@ b= _key.nextDouble();
 a = 1+2*3/b;
 z = true;
 z = false;
+t1 = "Verdade";
 if (a>b) {
 System.out.println(a);}else {
 System.out.println(b);}

@@ -12,6 +12,7 @@ programa
   z=Verdade;
   z=Falso;
   
+  t1="Verdade";
 
   se ( a > b ) {
      escreva (a);

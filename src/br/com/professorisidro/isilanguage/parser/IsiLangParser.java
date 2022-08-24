@@ -145,7 +145,8 @@ public class IsiLangParser extends Parser {
 		}
 		
 		public void generateCode(){
-			program.generateTarget();
+			program.generateJavaCode();
+			program.generatePythonCode();
 		}
 
 	public IsiLangParser(TokenStream input) {

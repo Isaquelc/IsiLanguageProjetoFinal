@@ -21,6 +21,16 @@ public class CommandEnquanto extends AbstractCommand {
 		str.append("}\n");
 		return str.toString();
 	}
+
+	public String generatePythonCode() {
+		// TODO Auto-generated method stub
+		StringBuilder str = new StringBuilder();
+		str.append("while (" + condition + "):\n");
+		for (AbstractCommand cmd : commandsEnq) {
+			str.append("	"+cmd.generatePythonCode());
+		}
+		return str.toString();
+	}
 	
 	@Override
 	public String toString() {

@@ -16,6 +16,12 @@ public class CommandLeitura extends AbstractCommand {
 		// TODO Auto-generated method stub
 		return id +"= _key." + (var.getType()==IsiVariable.NUMBER? "nextDouble();": "nextLine();");
 	}
+
+	@Override
+	public String generatePythonCode() {
+		// TODO Auto-generated method stub
+		return id +" = " + (var.getType()==IsiVariable.NUMBER? "float(intput());": "input())\n");
+	}
 	@Override
 	public String toString() {
 		return "CommandLeitura [id=" + id + "]";

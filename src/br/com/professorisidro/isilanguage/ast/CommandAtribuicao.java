@@ -1,6 +1,6 @@
 package br.com.professorisidro.isilanguage.ast;
 
-import br.com.professorisidro.isilanguage.datastructures.IsiVariable;
+// import br.com.professorisidro.isilanguage.datastructures.IsiVariable;
 
 public class CommandAtribuicao extends AbstractCommand{
 
@@ -15,13 +15,28 @@ public class CommandAtribuicao extends AbstractCommand{
 	@Override
 	public String generateJavaCode() {
 		// TODO Auto-generated method stub
-		if (expr.equals("Verdade")) {
-			expr="true";
-		} else if (expr.equals("Falso")) {
-			expr="false";
+		String finalExpr=this.expr;
+		if (this.expr.equals("Verdade")) {
+			finalExpr="true";
+		} else if (this.expr.equals("Falso")) {
+			finalExpr="false";
 		}
-		return id + " = "+expr+";";
+		return id + " = "+finalExpr+";";
 	}
+
+	@Override
+	public String generatePythonCode() {
+		// TODO Auto-generated method stub
+		String finalExpr=this.expr;
+		if (this.expr.equals("Verdade")) {
+			finalExpr="True";
+		} else if (this.expr.equals("Falso")) {
+			finalExpr="False";
+		}
+		return id + " = "+finalExpr+"\n";
+	}
+
+
 	@Override
 	public String toString() {
 		return "CommandAtribuicao [id=" + id + ", expr=" + expr + "]";

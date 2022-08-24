@@ -61,7 +61,8 @@ grammar IsiLang;
 	}
 	
 	public void generateCode(){
-		program.generateTarget();
+		program.generateJavaCode();
+		program.generatePythonCode();
 	}
 }
 
