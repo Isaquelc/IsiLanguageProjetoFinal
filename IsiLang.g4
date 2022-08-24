@@ -35,7 +35,7 @@ grammar IsiLang;
 	private ArrayList<AbstractCommand> listaFalse;
 	private ArrayList<AbstractCommand> commandEnq;
 
-	private String[] typeDict = new String[] {"numero", "text"};
+	private String[] typeDict = new String[] {"numero", "texto", "booleano"};
 	
 	public void verificaID(String id){
 		if (!symbolTable.exists(id)){
@@ -101,6 +101,7 @@ declaravar :  tipo ID  {
 	
 tipo       	: 'numero' { _tipo = IsiVariable.NUMBER;  }
 			| 'texto'  { _tipo = IsiVariable.TEXT;  }
+			| 'booleano'  { _tipo = IsiVariable.BOOLEAN;  }
 			;
         
 bloco	: 	{ 	curThread = new ArrayList<AbstractCommand>(); 
@@ -224,8 +225,12 @@ expr		:  termo (
 				termo
 				)*
 			|
-				TEXTO { _exprContent += _input.LT(-1).getText();
+				TEXT { _exprContent += _input.LT(-1).getText();
 						_exprType = 1;
+						}
+			|
+				BOOLEAN { _exprContent += _input.LT(-1).getText();
+						_exprType = 2;
 						}
 			;
 			
@@ -279,4 +284,6 @@ WS		: (' ' | '\t' | '\n' | '\r') -> skip;
 
 QUOTES 	: ('"');
 
-TEXTO	: ["]([a-z] | [A-Z] | [0-9] | ' ')*["];
+TEXT: ["]([a-z] | [A-Z] | [0-9] | ' ')*["];
+
+BOOLEAN : 'Verdade' | 'Falso';

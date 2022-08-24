@@ -1,6 +1,7 @@
 programa
 
   numero a, b;
+  booleano z;
   texto  t1;
 
   leia(a);
@@ -8,6 +9,8 @@ programa
   leia(t1);
   
   a = 1 + 2 * 3 / b;
+  z=Verdade;
+  z=Falso;
   t1 = "textao sim";
 
   se ( a > b ) {
@@ -21,6 +24,6 @@ enquanto (a > b) {
    escreva (a);
    a = a-1;
 }
-  
+ 
 
 fimprog;
