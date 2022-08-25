@@ -20,7 +20,7 @@ public class CommandLeitura extends AbstractCommand {
 	@Override
 	public String generatePythonCode() {
 		// TODO Auto-generated method stub
-		return id +" = " + (var.getType()==IsiVariable.NUMBER? "float(intput());": "input())\n");
+		return id +" = " + (var.getType()==IsiVariable.NUMBER? "float(input())\n": "input()\n");
 	}
 	@Override
 	public String toString() {

@@ -4,7 +4,9 @@ maior=None
 z=None
 t1=None
 maior = " maior que "
-a = float(intput());b = float(intput());z = True
+a = float(input())
+b = float(input())
+z = True
 t1 = "Verdade"
 print(t1)
 if (a>b):
@@ -23,3 +25,5 @@ z = False
 while (a>b):
     print(b)
     z = False
+print(a)
+print(b)

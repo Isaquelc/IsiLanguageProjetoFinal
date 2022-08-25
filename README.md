@@ -6,9 +6,9 @@
 
 ## Itens que foram entregues: 
  - 3 tipos de dados
-    - numero (incluindo defimal)
+    - numero (incluindo decimal)
     - texto
-    - booleao (adicional)
+    - booleano (adicional)
  - if/else
  - duas estruturas de repetição
     - while loop
@@ -20,3 +20,6 @@
  - geração de duas linguagens de destino
     - Java
     - Python (adicional)
+
+## Link do video no YouTube mostrando o Compilador:
+ - (https://youtu.be/j2WkZjVYBws)[https://youtu.be/j2WkZjVYBws]

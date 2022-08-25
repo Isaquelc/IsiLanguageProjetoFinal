@@ -23,4 +23,6 @@ System.out.println(a);a = a+1;}
 do {
 System.out.println(b);z = false;
 } while (a>b);
+System.out.println(a);
+System.out.println(b);
   }}

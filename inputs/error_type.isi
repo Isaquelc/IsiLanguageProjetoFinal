@@ -1,0 +1,7 @@
+programa
+
+  numero a;
+
+  a = "test";
+
+fimprog;

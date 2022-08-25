@@ -35,4 +35,7 @@ faca (
    z=Falso;
 ) enquanto (a>b)
 
+escreva(a);
+escreva(b);
+
 fimprog;

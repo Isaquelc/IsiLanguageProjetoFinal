@@ -1,7 +1,7 @@
 programa
 
-  numero a, b;
-  
+  numero a,b;
+
   leia(c);
 
 fimprog;
