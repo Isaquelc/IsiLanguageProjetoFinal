@@ -1,20 +1,25 @@
 a=None
 b=None
+maior=None
 z=None
 t1=None
-a = float(intput());b = float(intput());a = 1+2*3/b
-z = True
-z = False
+maior = " maior que "
+a = float(intput());b = float(intput());z = True
 t1 = "Verdade"
+print(t1)
 if (a>b):
 	print(a)
+	print(maior)
+	print(b)
 else:
 	print(b)
-while (a>b):
+	print(maior)
 	print(a)
-	a = a-1
+while (a<100):
+	print(a)
+	a = a+1
 print(b)
-b = b+1
-while (a<b):
+z = False
+while (a>b):
     print(b)
-    b = b+1
+    z = False

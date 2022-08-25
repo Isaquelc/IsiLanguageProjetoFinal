@@ -2,33 +2,37 @@ programa
 
   numero a, b;
   booleano z;
-  texto  t1;
+  texto t1, maior;
+
+  maior=" maior que ";
 
   leia(a);
   leia(b);
 
-  
-  a = 1 + 2 * 3 / b;
   z=Verdade;
-  z=Falso;
   
   t1="Verdade";
+  escreva(t1);
 
   se ( a > b ) {
      escreva (a);
+     escreva (maior);
+     escreva (b);
   }
   senao {
      escreva (b);
+     escreva (maior);
+     escreva (a);
   }
   
-enquanto (a > b) {
+enquanto (a<100) {
    escreva (a);
-   a = a-1;
+   a = a+1;
 }
  
 faca (
    escreva (b);
-   b = b+1;
-) enquanto (a<b)
+   z=Falso;
+) enquanto (a>b)
 
 fimprog;

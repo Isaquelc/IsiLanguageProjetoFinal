@@ -1,0 +1,13 @@
+programa
+
+  numero x, y;
+  texto nome;
+
+  leia(nome);
+
+  y = 10.4;
+
+  escreva(nome);
+  escreva(y);
+
+fimprog;
