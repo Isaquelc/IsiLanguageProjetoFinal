@@ -22,4 +22,5 @@
     - Python (adicional)
 
 ## Link do video no YouTube mostrando o Compilador:
- - (https://youtu.be/j2WkZjVYBws)[https://youtu.be/j2WkZjVYBws]
+ - https://youtu.be/j2WkZjVYBws
+ _(obs: o audio corta algumas vezes, houve um problema com meu microfone no dia da gravação :()_
